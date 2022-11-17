@@ -1,2 +1,2 @@
 "use strict";(self["webpackChunkwhereismyhome"]=self["webpackChunkwhereismyhome"]||[]).push([[276],{276:function(e,t,n){n.r(t),n.d(t,{default:function(){return l}});var r=function(){var e=this,t=e._self._c;return t("b-container",{staticClass:"bv-example-row mt-3 text-center"},[t("h3",{staticClass:"underline-gray"},[t("b-icon",{attrs:{icon:"question-lg"}}),e._v(" QnA Service")],1),t("router-view")],1)},s=[],i={name:"AppBoard"},a=i,u=n(1001),c=(0,u.Z)(a,r,s,!1,null,"48e0522b",null),l=c.exports}}]);
-//# sourceMappingURL=276.42b7c42b.js.map
+//# sourceMappingURL=276.f648ed04.js.map
