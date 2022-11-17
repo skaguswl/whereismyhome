@@ -1,4 +1,4 @@
-# whereismyhome_final
+# whereismyhome_vue
 
 
 
@@ -15,14 +15,14 @@ Already a pro? Just edit this README.md and make it your own. Want to make it ea
 
 ```
 cd existing_repo
-git remote add origin https://lab.ssafy.com/ai06010/whereismyhome_final.git
+git remote add origin https://lab.ssafy.com/ai06010/whereismyhome_vue.git
 git branch -M master
 git push -uf origin master
 ```
 
 ## Integrate with your tools
 
-- [ ] [Set up project integrations](https://lab.ssafy.com/ai06010/whereismyhome_final/-/settings/integrations)
+- [ ] [Set up project integrations](https://lab.ssafy.com/ai06010/whereismyhome_vue/-/settings/integrations)
 
 ## Collaborate with your team
 
