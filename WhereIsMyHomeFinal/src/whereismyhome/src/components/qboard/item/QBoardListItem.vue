@@ -17,11 +17,11 @@ export default {
   name: "QBoardListItem",
   props: {
     qnaId: Number,
-    userid: String,
+    userId: String,
     subject: String,
     hit: Number,
-    regtime: String,
-    replystate: String,
+    createdDate: String,
+    replyState: String,
   },
   filters: {
     dateFormat(regtime) {

@@ -19,7 +19,7 @@
       <b-col>
         <b-card
           :header-html="`<h3>${article.qnaId}.
-          ${article.subject} [${article.hit}]</h3><div><h6>${article.userid}</div><div>${article.regtime}</h6></div>`"
+          ${article.subject} </h3><div><h6>${article.userId}</div><div>${article.createdDate}</h6></div>`"
           class="mb-2"
           border-variant="dark"
           no-body
@@ -62,12 +62,14 @@ export default {
       return "";
     },
     replycontent() {
-      if (this.article.replystate == "답변 완료") return this.article.reply.split("\n").join("<br>");
+      if (this.article.replyState == "답변 완료") return this.article.reply.split("\n").join("<br>");
       return "답변이 아직 작성되지 않았습니다.";
     },
   },
   created() {
+    console.log("dkdkdkdk");
     http.get(`/qna/${this.$route.params.qnaId}`).then(({ data }) => {
+      console.log(data);
       this.article = data;
     });
   },

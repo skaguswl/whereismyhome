@@ -99,9 +99,9 @@ export default {
           subject: this.article.subject,
           content: this.article.content,
         })
-        .then(({ data }) => {
+        .then((response) => {
           let msg = "등록 처리시 문제가 발생했습니다.";
-          if (data === "success") {
+          if (response.status === 200) {
             msg = "등록이 완료되었습니다.";
           }
           alert(msg);

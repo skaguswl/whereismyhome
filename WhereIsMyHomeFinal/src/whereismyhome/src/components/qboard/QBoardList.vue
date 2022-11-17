@@ -25,7 +25,7 @@
 </template>
 
 <script>
-// import http from "@/api/http";
+import http from "@/api/http";
 
 export default {
   name: "QBoardList",
@@ -42,18 +42,17 @@ export default {
         // },
       ],
       fields: [
-        { key: "replystate", label: "답변상태", tdClass: "tdClass" },
+        { key: "replyState", label: "답변상태", tdClass: "tdClass" },
         { key: "subject", label: "제목", tdClass: "tdSubject" },
         { key: "userid", label: "작성자", tdClass: "tdClass" },
-        { key: "regtime", label: "작성일", tdClass: "tdClass" },
-        { key: "hit", label: "조회수", tdClass: "tdClass" },
+        { key: "createdDate", label: "작성일", tdClass: "tdClass" },
       ],
     };
   },
   created() {
-    // http.get(`/qna`).then(({ data }) => {
-    //   this.articles = data;
-    // });
+    http.get(`/qna`).then(({ data }) => {
+      this.articles = data.content;
+    });
   },
   methods: {
     moveWrite() {
