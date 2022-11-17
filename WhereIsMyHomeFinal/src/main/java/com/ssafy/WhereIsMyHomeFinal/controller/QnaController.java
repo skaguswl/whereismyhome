@@ -34,7 +34,7 @@ public class QnaController {
     }
 
     @GetMapping("/{qnaId}")
-    public QnaDto getQna(@RequestParam Long qnaId) {
+    public QnaDto getQna(@PathVariable Long qnaId) {
         return qnaService.getQnaDto(qnaId);
     }
 }

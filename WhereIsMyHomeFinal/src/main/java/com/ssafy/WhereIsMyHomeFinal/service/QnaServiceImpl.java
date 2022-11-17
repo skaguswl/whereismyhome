@@ -25,7 +25,7 @@ public class QnaServiceImpl implements QnaService{
     public Page<QnaDto> getQnaList(Pageable pageable) {
         return qnaRepository.findAll(pageable).map(q -> QnaDto.builder()
                 .qnaId(q.getId())
-                .userid(q.getUserid())
+                .userid(q.getUserId())
                 .subject(q.getSubject())
                 .content(q.getContent())
                 .replyState(q.getReplyState().getDescription())
@@ -41,9 +41,11 @@ public class QnaServiceImpl implements QnaService{
         }
         return QnaDto.builder()
                 .qnaId(qna.get().getId())
+                .userid(qna.get().getUserId())
                 .subject(qna.get().getSubject())
                 .content(qna.get().getSubject())
                 .replyState(qna.get().getReplyState().getDescription())
+                .createdDate(qna.get().getCreatedDate().toLocalDate())
                 .build();
     }
 }

@@ -21,7 +21,7 @@ public class Qna extends BaseEntity {
     private Long id;
 
     @Column(nullable = false, updatable = false)
-    private String userid;
+    private String userId;
 
     @Column(nullable = false)
     private String subject;
@@ -36,7 +36,7 @@ public class Qna extends BaseEntity {
     private ReplyState replyState;
 
     public Qna(QnaDto qnaDto) {
-        this.userid = qnaDto.getUserid();
+        this.userId = qnaDto.getUserid();
         this.subject = qnaDto.getSubject();
         this.content = qnaDto.getContent();
 
