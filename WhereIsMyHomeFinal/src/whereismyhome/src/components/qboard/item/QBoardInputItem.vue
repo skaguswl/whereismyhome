@@ -49,7 +49,7 @@ export default {
   data() {
     return {
       article: {
-        articleno: 0,
+        qnaId: 0,
         userid: "",
         subject: "",
         content: "",
@@ -62,8 +62,8 @@ export default {
   },
   created() {
     if (this.type === "modify") {
-      http.get(`/qna/${this.$route.params.articleno}`).then(({ data }) => {
-        // this.article.articleno = data.article.articleno;
+      http.get(`/qna/${this.$route.params.qnaId}`).then(({ data }) => {
+        // this.article.qnaId = data.article.qnaId;
         // this.article.userid = data.article.userid;
         // this.article.subject = data.article.subject;
         // this.article.content = data.article.content;
@@ -87,7 +87,7 @@ export default {
     },
     onReset(event) {
       event.preventDefault();
-      this.article.articleno = 0;
+      this.article.qnaId = 0;
       this.article.subject = "";
       this.article.content = "";
       this.moveList();
@@ -111,7 +111,7 @@ export default {
     modifyArticle() {
       http
         .put(`/qna`, {
-          articleno: this.article.articleno,
+          qnaId: this.article.qnaId,
           userid: this.article.userid,
           subject: this.article.subject,
           content: this.article.content,

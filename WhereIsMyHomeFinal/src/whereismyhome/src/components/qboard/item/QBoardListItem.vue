@@ -1,8 +1,8 @@
 <template>
   <b-tr>
-    <b-td>{{ articleno }}</b-td>
+    <b-td>{{ replystate }}</b-td>
     <b-th class="text-left">
-      <router-link :to="{ name: 'qboardview', params: { articleno: articleno } }">{{ subject }}</router-link>
+      <router-link :to="{ name: 'qboardview', params: { qnaId: qnaId } }">{{ subject }}</router-link>
     </b-th>
     <b-td>{{ hit }}</b-td>
     <b-td>{{ userid }}</b-td>
@@ -16,11 +16,12 @@ import moment from "moment";
 export default {
   name: "QBoardListItem",
   props: {
-    articleno: Number,
+    qnaId: Number,
     userid: String,
     subject: String,
     hit: Number,
     regtime: String,
+    replystate: String,
   },
   filters: {
     dateFormat(regtime) {

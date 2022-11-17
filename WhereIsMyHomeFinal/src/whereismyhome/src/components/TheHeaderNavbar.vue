@@ -16,6 +16,10 @@
               <b-icon icon="question-lg" font-scale="2"></b-icon>
               QnA게시판
             </router-link>
+            <router-link :to="{ name: 'qboard' }" class="m-2 link">
+              <b-icon icon="house" font-scale="2"></b-icon>
+              아파트정보
+            </router-link>
           </b-nav-item>
         </b-navbar-nav>
 

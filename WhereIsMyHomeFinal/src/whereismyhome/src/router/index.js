@@ -35,7 +35,7 @@ const routes = [
         component: () => import("@/components/qboard/QBoardWrite"),
       },
       {
-        path: "view/:articleno",
+        path: "view/:qnaId",
         name: "qboardview",
         component: () => import("@/components/qboard/QBoardView"),
       },
@@ -45,9 +45,19 @@ const routes = [
         component: () => import("@/components/qboard/QBoardModify"),
       },
       {
-        path: "delete/:articleno",
+        path: "delete/:qnaId",
         name: "qboarddelete",
         component: () => import("@/components/qboard/QBoardDelete"),
+      },
+      {
+        path: "delete/:qnaId",
+        name: "qboarddelete",
+        component: () => import("@/components/qboard/QBoardDelete"),
+      },
+      {
+        path: "rwrite",
+        name: "qboardrwrite",
+        component: () => import("@/components/qboard/QBoardRWrite"),
       },
     ],
   },

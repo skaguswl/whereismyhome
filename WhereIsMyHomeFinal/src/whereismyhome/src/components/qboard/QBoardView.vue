@@ -12,12 +12,13 @@
       <b-col class="text-right">
         <b-button variant="outline-info" size="sm" @click="moveModifyArticle" class="mr-2">글수정</b-button>
         <b-button variant="outline-danger" size="sm" @click="deleteArticle">글삭제</b-button>
+        <b-button variant="outline-secondary" size="sm" @click="moveWriteReply">답변작성</b-button>
       </b-col>
     </b-row>
     <b-row class="mb-1">
       <b-col>
         <b-card
-          :header-html="`<h3>${article.articleno}.
+          :header-html="`<h3>${article.qnaId}.
           ${article.subject} [${article.hit}]</h3><div><h6>${article.userid}</div><div>${article.regtime}</h6></div>`"
           class="mb-2"
           border-variant="dark"
@@ -26,6 +27,9 @@
           <b-card-body class="text-left">
             <div v-html="message"></div>
           </b-card-body>
+          <b-list-group flush>
+            <b-list-group-item><div v-html="replycontent"></div></b-list-group-item>
+          </b-list-group>
         </b-card>
       </b-col>
     </b-row>
@@ -40,7 +44,16 @@ export default {
   name: "QBoardDetail",
   data() {
     return {
-      article: {},
+      // article: {
+      //   qnaId: "1",
+      //   subject: "제목",
+      //   userid: "ID",
+      //   regtime: "20111111",
+      //   hit: 1,
+      //   replystate: "미답변",
+      //   reply: "답변내용ㅇ요요요",
+      //   content: "내용내용내용",
+      // },
     };
   },
   computed: {
@@ -48,9 +61,13 @@ export default {
       if (this.article.content) return this.article.content.split("\n").join("<br>");
       return "";
     },
+    replycontent() {
+      if (this.article.replystate == "답변 완료") return this.article.reply.split("\n").join("<br>");
+      return "답변이 아직 작성되지 않았습니다.";
+    },
   },
   created() {
-    http.get(`/qna/${this.$route.params.articleno}`).then(({ data }) => {
+    http.get(`/qna/${this.$route.params.qnaId}`).then(({ data }) => {
       this.article = data;
     });
   },
@@ -58,20 +75,23 @@ export default {
     moveModifyArticle() {
       this.$router.replace({
         name: "qboardmodify",
-        params: { articleno: this.article.articleno },
+        params: { qnaId: this.article.qnaId },
       });
-      //   this.$router.push({ path: `/board/modify/${this.article.articleno}` });
+      //   this.$router.push({ path: `/board/modify/${this.article.qnaId}` });
     },
     deleteArticle() {
       if (confirm("정말로 삭제?")) {
         this.$router.replace({
           name: "qboarddelete",
-          params: { articleno: this.article.articleno },
+          params: { qnaId: this.article.qnaId },
         });
       }
     },
     moveList() {
       this.$router.push({ name: "qboardlist" });
+    },
+    moveWriteReply() {
+      this.$router.push({ name: "qboardrwrite" });
     },
   },
   // filters: {

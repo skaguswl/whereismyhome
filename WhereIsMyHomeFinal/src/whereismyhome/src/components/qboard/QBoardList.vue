@@ -14,7 +14,7 @@
       <b-col>
         <b-table striped hover :items="articles" :fields="fields" @row-clicked="viewArticle">
           <template #cell(subject)="data">
-            <router-link :to="{ name: 'qboardview', params: { articleno: data.item.articleno } }">
+            <router-link :to="{ name: 'qboardview', params: { qnaId: data.item.qnaId } }">
               {{ data.item.subject }}
             </router-link>
           </template>
@@ -25,15 +25,24 @@
 </template>
 
 <script>
-import http from "@/api/http";
+// import http from "@/api/http";
 
 export default {
   name: "QBoardList",
   data() {
     return {
-      articles: [],
+      articles: [
+        // {
+        //   qnaId: "1",
+        //   subject: "aaaa",
+        //   userid: "a",
+        //   regtime: "111",
+        //   hit: 1,
+        //   replystate: "미답변",
+        // },
+      ],
       fields: [
-        { key: "articleno", label: "글번호", tdClass: "tdClass" },
+        { key: "replystate", label: "답변상태", tdClass: "tdClass" },
         { key: "subject", label: "제목", tdClass: "tdSubject" },
         { key: "userid", label: "작성자", tdClass: "tdClass" },
         { key: "regtime", label: "작성일", tdClass: "tdClass" },
@@ -42,20 +51,18 @@ export default {
     };
   },
   created() {
-    http.get(`/qna`).then(({ data }) => {
-      this.articles = data;
-    });
+    // http.get(`/qna`).then(({ data }) => {
+    //   this.articles = data;
+    // });
   },
   methods: {
     moveWrite() {
-      console.log("dkdkdkd");
       this.$router.push({ name: "qboardwrite" });
-      console.log("aaaaa");
     },
     viewArticle(article) {
       this.$router.push({
         name: "qboardview",
-        params: { articleno: article.articleno },
+        params: { qnaId: article.qnaId },
       });
     },
   },

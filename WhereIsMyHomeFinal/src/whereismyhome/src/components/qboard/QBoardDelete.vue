@@ -17,7 +17,7 @@ import http from "@/api/http";
 export default {
   name: "QBoardDelete",
   created() {
-    http.delete(`/qna/${this.$route.params.articleno}`).then(({ data }) => {
+    http.delete(`/qna/${this.$route.params.qnaId}`).then(({ data }) => {
       let msg = "삭제 처리시 문제가 발생했습니다.";
       if (data === "success") {
         msg = "삭제가 완료되었습니다.";
