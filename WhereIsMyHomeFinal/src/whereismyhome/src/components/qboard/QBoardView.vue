@@ -10,7 +10,9 @@
         <b-button variant="outline-primary" @click="moveList">목록</b-button>
       </b-col>
       <b-col class="text-right">
-        <b-button variant="outline-info" size="sm" @click="moveModifyArticle" class="mr-2">글수정</b-button>
+        <b-button variant="outline-info" size="sm" @click="moveModifyArticle" class="mr-2"
+          >글수정</b-button
+        >
         <b-button variant="outline-danger" size="sm" @click="deleteArticle">글삭제</b-button>
         <b-button variant="outline-secondary" size="sm" @click="moveWriteReply">답변작성</b-button>
       </b-col>
@@ -19,7 +21,7 @@
       <b-col>
         <b-card
           :header-html="`<h3>${article.qnaId}.
-          ${article.subject} </h3><div><h6>${article.userId}</div><div>${article.createdDate}</h6></div>`"
+          ${article.subject} </h3><div><h6>${article.userid}</div><div>${article.createdDate}</h6></div>`"
           class="mb-2"
           border-variant="dark"
           no-body
@@ -44,6 +46,9 @@ export default {
   name: "QBoardDetail",
   data() {
     return {
+      article: {
+        qnaId: "",
+      },
       // article: {
       //   qnaId: "1",
       //   subject: "제목",
@@ -62,14 +67,13 @@ export default {
       return "";
     },
     replycontent() {
-      if (this.article.replyState == "답변 완료") return this.article.reply.split("\n").join("<br>");
+      if (this.article.replyState == "답변 완료")
+        return this.article.reply.split("\n").join("<br>");
       return "답변이 아직 작성되지 않았습니다.";
     },
   },
   created() {
-    console.log("dkdkdkdk");
     http.get(`/qna/${this.$route.params.qnaId}`).then(({ data }) => {
-      console.log(data);
       this.article = data;
     });
   },

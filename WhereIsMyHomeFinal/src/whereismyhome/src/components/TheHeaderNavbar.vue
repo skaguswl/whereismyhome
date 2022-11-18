@@ -3,7 +3,12 @@
     <b-navbar toggleable="lg" type="light" variant="light">
       <b-navbar-brand href="#">
         <router-link :to="{ name: 'main' }">
-          <b-img :src="require('@/assets/logo.png')" id="logo" class="d-inline-block align-top" alt="logo"></b-img>
+          <b-img
+            :src="require('@/assets/logo.png')"
+            id="logo"
+            class="d-inline-block align-top"
+            alt="logo"
+          ></b-img>
         </router-link>
       </b-navbar-brand>
 
@@ -16,7 +21,7 @@
               <b-icon icon="question-lg" font-scale="2"></b-icon>
               QnA게시판
             </router-link>
-            <router-link :to="{ name: 'qboard' }" class="m-2 link">
+            <router-link :to="{ name: 'map' }" class="m-2 link">
               <b-icon icon="house" font-scale="2"></b-icon>
               아파트정보
             </router-link>
@@ -35,7 +40,9 @@
               </router-link>
             </b-dropdown-item>
             <b-dropdown-item href="#">
-              <router-link :to="{ name: 'login' }" class="link"> <b-icon icon="key"></b-icon> 로그인 </router-link>
+              <router-link :to="{ name: 'login' }" class="link">
+                <b-icon icon="key"></b-icon> 로그인
+              </router-link>
             </b-dropdown-item>
           </b-nav-item-dropdown>
         </b-navbar-nav>
