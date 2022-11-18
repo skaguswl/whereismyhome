@@ -48,4 +48,9 @@ public class QnaServiceImpl implements QnaService{
                 .createdDate(qna.get().getCreatedDate().toLocalDate())
                 .build();
     }
+
+    @Override
+    public void deleteQna(Long qnaId) {
+        qnaRepository.deleteById(qnaId);
+    }
 }

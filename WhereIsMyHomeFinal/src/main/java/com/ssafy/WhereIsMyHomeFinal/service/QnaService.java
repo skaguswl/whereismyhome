@@ -13,5 +13,7 @@ public interface QnaService {
     Page<QnaDto> getQnaList(Pageable pageable);
 
     QnaDto getQnaDto(Long qnaId);
+
+    void deleteQna(Long qnaId);
 }
 

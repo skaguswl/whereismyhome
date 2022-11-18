@@ -37,4 +37,10 @@ public class QnaController {
     public QnaDto getQna(@PathVariable Long qnaId) {
         return qnaService.getQnaDto(qnaId);
     }
+
+    @DeleteMapping("/{qnaId}")
+    public ResponseEntity<?> deleteQna(@PathVariable Long qnaId) {
+        qnaService.deleteQna(qnaId);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

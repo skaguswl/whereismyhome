@@ -20,7 +20,7 @@ public class Qna extends BaseEntity {
     @Column(name = "qna_id")
     private Long id;
 
-    @Column(nullable = false, updatable = false)
+//    @Column(nullable = false, updatable = false)
     private String userId;
 
     @Column(nullable = false)
@@ -36,10 +36,8 @@ public class Qna extends BaseEntity {
     private ReplyState replyState;
 
     public Qna(QnaDto qnaDto) {
-        this.userId = qnaDto.getUserid();
         this.subject = qnaDto.getSubject();
         this.content = qnaDto.getContent();
-
     }
 
 }

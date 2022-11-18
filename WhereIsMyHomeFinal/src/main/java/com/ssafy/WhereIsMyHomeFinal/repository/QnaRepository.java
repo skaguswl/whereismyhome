@@ -1,6 +1,5 @@
 package com.ssafy.WhereIsMyHomeFinal.repository;
 
-import com.ssafy.WhereIsMyHomeFinal.domain.dto.QnaDto;
 import com.ssafy.WhereIsMyHomeFinal.domain.entity.Qna;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,4 +14,6 @@ public interface QnaRepository extends JpaRepository<Qna, Long> {
     Page<Qna> findAll(Pageable pageable);
 
     Optional<Qna> findById(Long qnaId);
+
+    void deleteById(Long qnaId);
 }
