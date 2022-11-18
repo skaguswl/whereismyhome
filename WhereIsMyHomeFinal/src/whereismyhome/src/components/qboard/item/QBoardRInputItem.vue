@@ -56,7 +56,8 @@ export default {
     registReply() {
       http
         .post(`/qna/reply`, {
-          content: this.reply.content,
+          qnaId: this.reply.qnaId,
+          reply: this.reply.content,
         })
         .then(({ data }) => {
           let msg = "등록 처리시 문제가 발생했습니다.";

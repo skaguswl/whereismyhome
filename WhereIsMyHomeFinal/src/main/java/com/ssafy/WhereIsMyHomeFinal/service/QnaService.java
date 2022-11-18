@@ -1,6 +1,7 @@
 package com.ssafy.WhereIsMyHomeFinal.service;
 
 import com.ssafy.WhereIsMyHomeFinal.domain.dto.QnaDto;
+import com.ssafy.WhereIsMyHomeFinal.domain.dto.ReplyDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -15,5 +16,9 @@ public interface QnaService {
     QnaDto getQnaDto(Long qnaId);
 
     void deleteQna(Long qnaId);
+
+    void updateQna(QnaDto qnaDto);
+
+    void registerReply(ReplyDto replyDto);
 }
 

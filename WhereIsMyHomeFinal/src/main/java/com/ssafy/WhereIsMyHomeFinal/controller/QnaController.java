@@ -1,6 +1,7 @@
 package com.ssafy.WhereIsMyHomeFinal.controller;
 
 import com.ssafy.WhereIsMyHomeFinal.domain.dto.QnaDto;
+import com.ssafy.WhereIsMyHomeFinal.domain.dto.ReplyDto;
 import com.ssafy.WhereIsMyHomeFinal.domain.exception.InvalidFormException;
 import com.ssafy.WhereIsMyHomeFinal.service.QnaService;
 import lombok.RequiredArgsConstructor;
@@ -41,6 +42,21 @@ public class QnaController {
     @DeleteMapping("/{qnaId}")
     public ResponseEntity<?> deleteQna(@PathVariable Long qnaId) {
         qnaService.deleteQna(qnaId);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PutMapping
+    public ResponseEntity<?> updateQna(@Validated @RequestBody QnaDto qnaDto, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            throw new InvalidFormException("다시 입력해주세요");
+        }
+        qnaService.updateQna(qnaDto);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping("/reply")
+    public ResponseEntity<?> registerReply(@RequestBody ReplyDto replyDto) {
+        qnaService.registerReply(replyDto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

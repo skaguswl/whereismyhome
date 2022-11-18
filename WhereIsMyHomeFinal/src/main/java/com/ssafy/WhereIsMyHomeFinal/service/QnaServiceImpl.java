@@ -1,17 +1,21 @@
 package com.ssafy.WhereIsMyHomeFinal.service;
 
 import com.ssafy.WhereIsMyHomeFinal.domain.dto.QnaDto;
+import com.ssafy.WhereIsMyHomeFinal.domain.dto.ReplyDto;
 import com.ssafy.WhereIsMyHomeFinal.domain.entity.Qna;
+import com.ssafy.WhereIsMyHomeFinal.domain.exception.NotFoundException;
 import com.ssafy.WhereIsMyHomeFinal.repository.QnaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class QnaServiceImpl implements QnaService{
 
     private final QnaRepository qnaRepository;
@@ -37,7 +41,7 @@ public class QnaServiceImpl implements QnaService{
     public QnaDto getQnaDto(Long qnaId) {
         Optional<Qna> qna = qnaRepository.findById(qnaId);
         if (qna.isEmpty()) {
-            throw new RuntimeException("");
+            throw new NotFoundException("등록 처리시 문제가 발생했습니다.");
         }
         return QnaDto.builder()
                 .qnaId(qna.get().getId())
@@ -52,5 +56,18 @@ public class QnaServiceImpl implements QnaService{
     @Override
     public void deleteQna(Long qnaId) {
         qnaRepository.deleteById(qnaId);
+    }
+
+    @Override
+    public void updateQna(QnaDto qnaDto) {
+        Qna qna = qnaRepository.findById(qnaDto.getQnaId()).orElseThrow(() -> new NotFoundException("수정 처리시 문제가 발생했습니다."));
+        qna.setSubject(qnaDto.getSubject());
+        qna.setContent(qnaDto.getContent());
+    }
+
+    @Override
+    public void registerReply(ReplyDto replyDto) {
+        Qna qna = qnaRepository.findById(replyDto.getQnaId()).orElseThrow(() -> new NotFoundException("수정 처리시 문제가 발생했습니다."));
+        qna.setReply(replyDto.getReply());
     }
 }

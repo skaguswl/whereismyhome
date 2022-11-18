@@ -30,12 +30,33 @@ public class Qna extends BaseEntity {
     @Column(nullable = false, length = 20000)
     private String content;
 
+    @Lob
+    @Column(length = 20000)
+    private String reply;
+
     @Enumerated(EnumType.STRING)
     @Column(length = 10)
     @ColumnDefault("'N'")
     private ReplyState replyState;
 
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public void setReplyState(ReplyState replyState) {
+        this.replyState = replyState;
+    }
+
+    public void setReply(String reply) {
+        this.reply = reply;
+    }
+
     public Qna(QnaDto qnaDto) {
+        this.userId = qnaDto.getUserid();
         this.subject = qnaDto.getSubject();
         this.content = qnaDto.getContent();
     }
