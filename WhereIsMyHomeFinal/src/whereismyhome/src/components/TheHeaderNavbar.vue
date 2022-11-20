@@ -1,56 +1,45 @@
 <template>
   <div>
-    <b-navbar toggleable="lg" type="light" variant="light">
-      <b-navbar-brand href="#">
-        <router-link :to="{ name: 'main' }">
-          <b-img
-            :src="require('@/assets/logo.png')"
-            id="logo"
-            class="d-inline-block align-top"
-            alt="logo"
-          ></b-img>
-        </router-link>
-      </b-navbar-brand>
-
-      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-
-      <b-collapse id="nav-collapse" is-nav>
-        <b-navbar-nav>
-          <b-nav-item href="#">
-            <router-link :to="{ name: 'qboard' }" class="m-2 link">
-              <b-icon icon="question-lg" font-scale="2"></b-icon>
-              QnA게시판
-            </router-link>
-            <router-link :to="{ name: 'map' }" class="m-2 link">
-              <b-icon icon="house" font-scale="2"></b-icon>
-              아파트정보
-            </router-link>
-          </b-nav-item>
-        </b-navbar-nav>
-
-        <!-- Right aligned nav items -->
-        <b-navbar-nav class="ml-auto">
-          <b-nav-item-dropdown right>
-            <template #button-content>
-              <b-icon icon="people" font-scale="2"></b-icon>
-            </template>
-            <b-dropdown-item href="#">
-              <router-link :to="{ name: 'join' }" class="link">
-                <b-icon icon="person-circle"></b-icon> 회원가입
-              </router-link>
-            </b-dropdown-item>
-            <b-dropdown-item href="#">
-              <router-link :to="{ name: 'login' }" class="link">
-                <b-icon icon="key"></b-icon> 로그인
-              </router-link>
-            </b-dropdown-item>
-          </b-nav-item-dropdown>
-        </b-navbar-nav>
-      </b-collapse>
-    </b-navbar>
+    <v-toolbar dark color="primary">
+      <v-toolbar-items>
+        <v-btn text color="white"
+          ><router-link :to="{ name: 'home' }">
+            <v-img
+              alt="Logo"
+              class="shrink mr-2"
+              contain
+              :src="require('@/assets/logo-white.png')"
+              transition="scale-transition"
+              width="100"
+            /> </router-link
+        ></v-btn>
+        <v-btn>
+          <router-link :to="{ name: 'qboard' }" class="m-2 link">
+            <b-icon icon="question-lg" font-scale="2"></b-icon>QnA게시판
+          </router-link>
+        </v-btn>
+        <v-btn>
+          <router-link :to="{ name: 'house' }" class="m-2 link"
+            ><b-icon icon="house" font-scale="2"></b-icon> 아파트정보
+          </router-link>
+        </v-btn>
+      </v-toolbar-items>
+      <v-spacer></v-spacer>
+      <v-toolbar-items>
+        <v-btn
+          ><router-link :to="{ name: 'join' }" class="link">
+            <b-icon icon="person-circle"></b-icon> 회원가입
+          </router-link></v-btn
+        >
+        <v-btn
+          ><router-link :to="{ name: 'login' }" class="link">
+            <b-icon icon="key"></b-icon> 로그인
+          </router-link></v-btn
+        >
+      </v-toolbar-items>
+    </v-toolbar>
   </div>
 </template>
-
 <script>
 export default {
   name: "TheHeaderNavbar",

@@ -62,15 +62,24 @@ const routes = [
     ],
   },
   {
-    path: "/map",
-    name: "map",
-    component: () => import("@/views/AppMap"),
-    redirect: "/map/view",
+    path: "/house",
+    name: "house",
+    component: () => import("@/views/AppHouse"),
+  },
+  {
+    path: "/user",
+    name: "user",
+    component: () => import("@/views/AppUser"),
     children: [
       {
-        path: "view",
-        name: "mapview",
-        component: () => import("@/components/map/MapView"),
+        path: "join",
+        name: "join",
+        component: () => import("@/components/user/UserRegister"),
+      },
+      {
+        path: "login",
+        name: "login",
+        component: () => import("@/components/user/UserLogin"),
       },
     ],
   },
