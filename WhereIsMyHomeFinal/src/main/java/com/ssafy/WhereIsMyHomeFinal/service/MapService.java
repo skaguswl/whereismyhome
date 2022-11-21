@@ -1,6 +1,7 @@
 package com.ssafy.WhereIsMyHomeFinal.service;
 
 import com.ssafy.WhereIsMyHomeFinal.domain.dto.AptDto;
+import com.ssafy.WhereIsMyHomeFinal.domain.dto.LocationDto;
 import com.ssafy.WhereIsMyHomeFinal.domain.dto.MapDto;
 
 import java.util.List;
@@ -13,5 +14,5 @@ public interface MapService {
 
     public List<MapDto> dong(String regcodePattern);
 
-    public List<AptDto> apt(String regcodePattern);
+    public List<LocationDto> apt(String regcodePattern);
 }

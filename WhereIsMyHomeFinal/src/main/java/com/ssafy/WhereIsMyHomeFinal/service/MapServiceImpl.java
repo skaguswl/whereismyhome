@@ -1,6 +1,7 @@
 package com.ssafy.WhereIsMyHomeFinal.service;
 
 import com.ssafy.WhereIsMyHomeFinal.domain.dto.AptDto;
+import com.ssafy.WhereIsMyHomeFinal.domain.dto.LocationDto;
 import com.ssafy.WhereIsMyHomeFinal.domain.dto.MapDto;
 import com.ssafy.WhereIsMyHomeFinal.repository.DongcodeRepository;
 import com.ssafy.WhereIsMyHomeFinal.repository.HouseinfoRepository;
@@ -41,7 +42,7 @@ public class MapServiceImpl implements MapService {
     }
 
     @Override
-    public List<AptDto> apt(String regcodePattern) {
+    public List<LocationDto> apt(String regcodePattern) {
         return houseinfoRepository.findApt(regcodePattern);
     }
 }

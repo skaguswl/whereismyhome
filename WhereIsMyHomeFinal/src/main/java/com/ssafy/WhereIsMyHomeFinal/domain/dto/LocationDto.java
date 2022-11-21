@@ -4,20 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+@AllArgsConstructor
 @Getter
 @Setter
-@AllArgsConstructor
-public class AptDto {
-
-    private Long aptCode;
-
-    private Integer buildYear;
-
-    private String roadName;
-
-    private String dong;
-
-    private String jibun;
+public class LocationDto {
 
     private String apartmentName;
 
