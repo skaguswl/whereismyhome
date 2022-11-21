@@ -5,7 +5,7 @@
         <b-alert show><h3>답변 작성</h3></b-alert>
       </b-col>
     </b-row>
-    <q-board-r-input-item />
+    <q-board-r-input-item :id="qnaId" />
   </b-container>
 </template>
 
@@ -14,6 +14,12 @@ import QBoardRInputItem from "@/components/qboard/item/QBoardRInputItem";
 
 export default {
   name: "QBoardRWrite",
+  data() {
+    return {
+      // qnaId: ${ this.$route.params.qnaId };
+      qnaId: this.$route.params.qnaId,
+    };
+  },
   components: {
     QBoardRInputItem,
   },

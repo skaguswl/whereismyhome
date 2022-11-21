@@ -97,7 +97,7 @@ export default {
       this.$router.push({ name: "qboardlist" });
     },
     moveWriteReply() {
-      this.$router.push({ name: "qboardrwrite" });
+      this.$router.push({ name: "qboardrwrite", params: { qnaId: this.article.qnaId } });
     },
   },
   // filters: {
