@@ -42,7 +42,12 @@ public class MapServiceImpl implements MapService {
     }
 
     @Override
-    public List<LocationDto> apt(String regcodePattern) {
-        return houseinfoRepository.findApt(regcodePattern);
+    public List<LocationDto> loc(String regcodePattern) {
+        return houseinfoRepository.findLoc(regcodePattern);
+    }
+
+    @Override
+    public List<AptDto> apt(String lat, String lng) {
+        return null;
     }
 }

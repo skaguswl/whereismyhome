@@ -35,7 +35,12 @@ public class MapController {
     }
 
     @GetMapping("/apt")
-    public List<LocationDto> apt(@RequestParam String regcodePattern) {
-        return mapService.apt(regcodePattern);
+    public List<LocationDto> loc(@RequestParam String regcodePattern) {
+        return mapService.loc(regcodePattern);
+    }
+
+    @GetMapping("/loc")
+    public List<AptDto> apt(@RequestParam("lat") String lat, @RequestParam("lng") String lng) {
+        return null;
     }
 }

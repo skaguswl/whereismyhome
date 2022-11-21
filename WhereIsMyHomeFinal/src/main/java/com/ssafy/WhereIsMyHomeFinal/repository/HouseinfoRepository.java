@@ -13,5 +13,8 @@ public interface HouseinfoRepository extends JpaRepository<Houseinfo, Long> {
 
 
     @Query("select new com.ssafy.WhereIsMyHomeFinal.domain.dto.LocationDto(h.lng, h.lat) from Houseinfo h where h.dongcode.id = :dongCode")
-    List<LocationDto> findApt(@Param("dongCode") String regcodePattern);
+    List<LocationDto> findLoc(@Param("dongCode") String regcodePattern);
+
+//    @Query("select new com.ssafy.WhereIsMyHomeFinal.domain.dto.AptDto(h.aptCode, h.buildYear, h.roadName, h.dong, h.jibun, h.apartmentCode) from Houseinfo h where h.lng = :lng and h.lat = :lat")
+//    List<AptDto> findApt(@Param("lat") String lat, @Param("lng") String lng);
 }

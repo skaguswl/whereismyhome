@@ -8,11 +8,14 @@ import java.util.List;
 
 public interface MapService {
 
-    public List<MapDto> sido();
+    List<MapDto> sido();
 
-    public List<MapDto> gugun(String regcodePattern);
+    List<MapDto> gugun(String regcodePattern);
 
-    public List<MapDto> dong(String regcodePattern);
+    List<MapDto> dong(String regcodePattern);
 
-    public List<LocationDto> apt(String regcodePattern);
+    List<LocationDto> loc(String regcodePattern);
+
+    List<AptDto> apt(String lat, String lng);
+
 }

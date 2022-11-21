@@ -20,8 +20,4 @@ public class AptDto {
     private String jibun;
 
     private String apartmentName;
-
-    private String lng;
-
-    private String lat;
 }
