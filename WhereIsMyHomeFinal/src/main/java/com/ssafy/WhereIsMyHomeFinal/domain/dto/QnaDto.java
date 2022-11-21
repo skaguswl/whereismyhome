@@ -25,4 +25,6 @@ public class QnaDto {
     private String replyState;
 
     private LocalDate createdDate;
+
+    private String reply;
 }

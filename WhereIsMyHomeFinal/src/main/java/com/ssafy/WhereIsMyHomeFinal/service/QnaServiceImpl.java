@@ -3,6 +3,7 @@ package com.ssafy.WhereIsMyHomeFinal.service;
 import com.ssafy.WhereIsMyHomeFinal.domain.dto.QnaDto;
 import com.ssafy.WhereIsMyHomeFinal.domain.dto.ReplyDto;
 import com.ssafy.WhereIsMyHomeFinal.domain.entity.Qna;
+import com.ssafy.WhereIsMyHomeFinal.domain.enumtype.ReplyState;
 import com.ssafy.WhereIsMyHomeFinal.domain.exception.NotFoundException;
 import com.ssafy.WhereIsMyHomeFinal.repository.QnaRepository;
 import lombok.RequiredArgsConstructor;
@@ -50,6 +51,7 @@ public class QnaServiceImpl implements QnaService{
                 .content(qna.get().getSubject())
                 .replyState(qna.get().getReplyState().getDescription())
                 .createdDate(qna.get().getCreatedDate().toLocalDate())
+                .reply(qna.get().getReply())
                 .build();
     }
 
@@ -69,5 +71,6 @@ public class QnaServiceImpl implements QnaService{
     public void registerReply(ReplyDto replyDto) {
         Qna qna = qnaRepository.findById(replyDto.getQnaId()).orElseThrow(() -> new NotFoundException("수정 처리시 문제가 발생했습니다."));
         qna.setReply(replyDto.getReply());
+        qna.setReplyState(ReplyState.Y);
     }
 }
