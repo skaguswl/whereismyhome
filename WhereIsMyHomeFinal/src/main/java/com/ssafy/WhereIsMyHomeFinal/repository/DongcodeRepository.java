@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface MapRepository extends JpaRepository<Dongcode, Long> {
+public interface DongcodeRepository extends JpaRepository<Dongcode, Long> {
 
     @Query("select new com.ssafy.WhereIsMyHomeFinal.domain.dto.MapDto(substring(d.dongCode, 1, 2), d.sidoName) from Dongcode d where d.dongCode like '%00000000'")
     List<MapDto> findSido();

@@ -1,5 +1,6 @@
 package com.ssafy.WhereIsMyHomeFinal.controller;
 
+import com.ssafy.WhereIsMyHomeFinal.domain.dto.AptDto;
 import com.ssafy.WhereIsMyHomeFinal.domain.dto.MapDto;
 import com.ssafy.WhereIsMyHomeFinal.service.MapService;
 import lombok.RequiredArgsConstructor;
@@ -30,5 +31,10 @@ public class MapController {
     @GetMapping("/dong")
     public List<MapDto> dong(@RequestParam String regcodePattern) {
         return mapService.dong(regcodePattern);
+    }
+
+    @GetMapping("/apt")
+    public List<AptDto> apt(@RequestParam String regcodePattern) {
+        return mapService.apt(regcodePattern);
     }
 }
