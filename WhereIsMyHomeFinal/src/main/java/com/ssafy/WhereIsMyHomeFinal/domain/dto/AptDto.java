@@ -20,4 +20,16 @@ public class AptDto {
     private String jibun;
 
     private String apartmentName;
+
+    private String dealAmount;
+
+    private String lat;
+
+    private String lng;
+
+    private int dealYear;
+
+    private int dealMonth;
+
+    private int dealDay;
 }
