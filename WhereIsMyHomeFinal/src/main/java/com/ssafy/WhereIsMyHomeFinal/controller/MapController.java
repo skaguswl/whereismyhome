@@ -34,13 +34,13 @@ public class MapController {
         return mapService.dong(regcodePattern);
     }
 
-    @GetMapping("/apt")
+    @GetMapping("/loc")
     public List<LocationDto> loc(@RequestParam String regcodePattern) {
         return mapService.loc(regcodePattern);
     }
 
-    @GetMapping("/loc")
+    @GetMapping("/apt")
     public List<AptDto> apt(@RequestParam("lat") String lat, @RequestParam("lng") String lng) {
-        return null;
+        return mapService.apt(lat, lng);
     }
 }

@@ -48,6 +48,6 @@ public class MapServiceImpl implements MapService {
 
     @Override
     public List<AptDto> apt(String lat, String lng) {
-        return null;
+        return houseinfoRepository.findApt(lat, lng);
     }
 }
