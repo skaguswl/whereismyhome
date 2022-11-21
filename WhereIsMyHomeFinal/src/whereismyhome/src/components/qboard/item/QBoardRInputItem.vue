@@ -43,7 +43,7 @@ export default {
 
       let err = true;
       let msg = "";
-      !this.reply.content && ((msg = "내용 입력해주세요"), (err = false), this.$refs.content.focus());
+      // !this.reply.content && ((msg = "내용 입력해주세요"), (err = false), this.$refs.content.focus());
 
       if (!err) alert(msg);
       this.registReply();

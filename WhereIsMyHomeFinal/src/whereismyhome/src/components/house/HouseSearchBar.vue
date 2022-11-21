@@ -1,20 +1,24 @@
 <template>
-  <v-app>
-    <v-row>
-      <v-col class="sm-3">
-        <v-tabs>
+  <v-row>
+    <!-- <v-col class="sm-3">
+      <v-card>
+        <v-tabs v-model="tab">
+          <v-tabs-slider></v-tabs-slider>
           <v-tab>아파트정보</v-tab>
           <v-tab>매매정보</v-tab>
         </v-tabs>
-      </v-col>
-      <v-col class="sm-3">
-        <v-select v-model="sidoCode" :items="sidos" @change="searchApt"></v-select>
-      </v-col>
-      <v-col class="sm-3">
-        <v-select v-model="gugunCode" :items="guguns" @change="searchApt"></v-select>
-      </v-col>
-    </v-row>
-  </v-app>
+      </v-card>
+    </v-col> -->
+    <v-col class="sm-3">
+      <v-select v-model="sidoCode" :items="sidos" @change="gugunList"></v-select>
+    </v-col>
+    <v-col class="sm-3">
+      <v-select v-model="gugunCode" :items="guguns" @change="dongList"></v-select>
+    </v-col>
+    <v-col class="sm-3">
+      <v-select v-model="dongCode" :items="dongs" @change="searchApt"></v-select>
+    </v-col>
+  </v-row>
 </template>
 
 <script>
@@ -24,17 +28,14 @@ export default {
   name: "HouseSearchBar",
   data() {
     return {
-      items: ["Foo", "Bar", "Fizz", "Buzz"],
+      tap: null,
       sidoCode: null,
       gugunCode: null,
+      dongCode: null,
     };
   },
   computed: {
-    ...mapState(["sidos", "guguns", "houses"]),
-
-    // sidos() {
-    //   return this.$store.state.sidos;
-    // },
+    ...mapState(["sidos", "guguns", "dongs", "houses"]),
   },
   created() {
     // this.$store.dispatch("getSido");
@@ -44,19 +45,22 @@ export default {
     this.getSido();
   },
   methods: {
-    ...mapActions(["getSido", "getGugun", "getHouseList"]),
-    ...mapMutations(["CLEAR_SIDO_LIST", "CLEAR_GUGUN_LIST", "CLEAR_APT_LIST"]),
-    // sidoList() {
-    //   this.getSido();
-    // },
+    ...mapActions(["getSido", "getGugun", "getDong", "getHouseList"]),
+    ...mapMutations(["CLEAR_SIDO_LIST", "CLEAR_GUGUN_LIST", "CLEAR_DONG_LIST", "CLEAR_APT_LIST"]),
     gugunList() {
       // console.log(this.sidoCode);
       this.CLEAR_GUGUN_LIST();
       this.gugunCode = null;
       if (this.sidoCode) this.getGugun(this.sidoCode);
     },
+    dongList() {
+      // console.log(this.sidoCode);
+      this.CLEAR_DONG_LIST();
+      this.dongCode = null;
+      if (this.gugunCode) this.getDong(this.gugunCode);
+    },
     searchApt() {
-      if (this.gugunCode) this.getHouseList(this.gugunCode);
+      if (this.dongCode) this.getHouseList(this.dongCode);
     },
   },
 };
