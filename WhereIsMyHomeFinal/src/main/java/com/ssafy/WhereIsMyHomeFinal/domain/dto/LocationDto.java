@@ -9,8 +9,6 @@ import lombok.Setter;
 @Setter
 public class LocationDto {
 
-    private String apartmentName;
-
     private String lng;
 
     private String lat;

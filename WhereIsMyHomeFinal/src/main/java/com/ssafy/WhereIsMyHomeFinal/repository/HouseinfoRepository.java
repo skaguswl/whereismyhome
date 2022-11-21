@@ -12,6 +12,6 @@ import java.util.List;
 public interface HouseinfoRepository extends JpaRepository<Houseinfo, Long> {
 
 
-    @Query("select new com.ssafy.WhereIsMyHomeFinal.domain.dto.LocationDto(h.apartmentName, h.lng, h.lat) from Houseinfo h where h.dongcode.id = :dongCode")
+    @Query("select new com.ssafy.WhereIsMyHomeFinal.domain.dto.LocationDto(h.lng, h.lat) from Houseinfo h where h.dongcode.id = :dongCode")
     List<LocationDto> findApt(@Param("dongCode") String regcodePattern);
 }
