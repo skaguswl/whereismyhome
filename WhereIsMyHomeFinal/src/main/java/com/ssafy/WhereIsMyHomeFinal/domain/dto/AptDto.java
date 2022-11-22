@@ -27,6 +27,10 @@ public class AptDto {
 
     private String lng;
 
+    private String area;
+
+    private String floor;
+
     private int dealYear;
 
     private int dealMonth;

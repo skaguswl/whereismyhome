@@ -4,16 +4,15 @@ import com.ssafy.WhereIsMyHomeFinal.domain.dto.UserInfoDto;
 import com.ssafy.WhereIsMyHomeFinal.domain.enumtype.Role;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Getter
 @Entity
 @NoArgsConstructor
+@ToString
 public class UserInfo extends BaseEntity {
 
     @Id
@@ -27,6 +26,7 @@ public class UserInfo extends BaseEntity {
 
     private String name;
 
+    @Enumerated(EnumType.STRING)
     private Role role;
 
     private String email;
