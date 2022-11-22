@@ -40,8 +40,7 @@ public class SecurityConfig {
         http.logout().disable();
         http.formLogin()
                 .successHandler((request, response, authentication) -> {
-                    response.sendRedirect("/");
-//                    response.getWriter().write("success");
+                    response.sendRedirect(request.getContextPath() + "/");
                 })
                 .failureHandler((request, response, exception) -> {
                     throw new LoginFailureException("로그인 실패");
