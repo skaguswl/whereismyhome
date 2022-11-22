@@ -4,12 +4,13 @@ import com.ssafy.WhereIsMyHomeFinal.domain.dto.QnaDto;
 import com.ssafy.WhereIsMyHomeFinal.domain.dto.ReplyDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Optional;
 
 public interface QnaService {
 
-    void register(QnaDto qnaDto);
+    void register(QnaDto qnaDto, UserDetails userDetails);
 
     Page<QnaDto> getQnaList(Pageable pageable);
 

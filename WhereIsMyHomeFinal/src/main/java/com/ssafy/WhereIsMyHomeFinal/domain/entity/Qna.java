@@ -20,8 +20,9 @@ public class Qna extends BaseEntity {
     @Column(name = "qna_id")
     private Long id;
 
-//    @Column(nullable = false, updatable = false)
-    private String userId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private UserInfo userInfo;
 
     @Column(nullable = false)
     private String subject;
@@ -56,7 +57,7 @@ public class Qna extends BaseEntity {
     }
 
     public Qna(QnaDto qnaDto) {
-        this.userId = qnaDto.getUserid();
+        this.userInfo = qnaDto.getUserInfo();
         this.subject = qnaDto.getSubject();
         this.content = qnaDto.getContent();
     }

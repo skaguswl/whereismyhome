@@ -1,30 +1,32 @@
 package com.ssafy.WhereIsMyHomeFinal.config;
 
+import com.ssafy.WhereIsMyHomeFinal.domain.exception.LoginFailureException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-
-import javax.servlet.Filter;
 
 @EnableWebSecurity
 public class SecurityConfig {
 
     private final String origin;
 
-    public SecurityConfig(@Value("${origin}") String origin) {
+    private final UserDetailsService userDetailsService;
+
+    public SecurityConfig(@Value("${origin}") String origin, UserDetailsService userDetailsService) {
         this.origin = origin;
+        this.userDetailsService = userDetailsService;
     }
 
     @Bean
-    public SecurityFilterChain configure(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.cors();
         http.authorizeRequests()
                 .anyRequest().permitAll();
@@ -32,6 +34,14 @@ public class SecurityConfig {
                 .frameOptions()
                 .sameOrigin();
         http.csrf().disable();
+        http.formLogin()
+                .successHandler((request, response, authentication) -> {
+//                    response.sendRedirect("/");
+                    response.getWriter().write("success");
+                })
+                .failureHandler((request, response, exception) -> {
+                    throw new LoginFailureException("로그인 실패");
+                });
         return http.build();
     }
 
@@ -49,8 +59,10 @@ public class SecurityConfig {
         return urlBasedCorsConfigurationSource;
     }
 
-//    @Bean
-//    public WebSecurityCustomizer configure() {
-//        return web -> web.ignoring().requestMatchers(PathRequest.toStaticResources().atCommonLocations());
-//    }
+    @Bean
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        return web -> web.ignoring().requestMatchers(PathRequest.toStaticResources().atCommonLocations());
+    }
+
+
 }

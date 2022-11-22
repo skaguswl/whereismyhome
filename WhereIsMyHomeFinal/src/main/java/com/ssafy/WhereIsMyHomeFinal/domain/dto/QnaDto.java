@@ -1,5 +1,6 @@
 package com.ssafy.WhereIsMyHomeFinal.domain.dto;
 
+import com.ssafy.WhereIsMyHomeFinal.domain.entity.UserInfo;
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;
@@ -14,7 +15,7 @@ public class QnaDto {
 
     private Long qnaId;
 
-    private String userid;
+    private UserInfo userInfo;
 
     @NotBlank
     private String subject;

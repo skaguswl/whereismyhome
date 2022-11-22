@@ -3,12 +3,15 @@ package com.ssafy.WhereIsMyHomeFinal.service;
 import com.ssafy.WhereIsMyHomeFinal.domain.dto.QnaDto;
 import com.ssafy.WhereIsMyHomeFinal.domain.dto.ReplyDto;
 import com.ssafy.WhereIsMyHomeFinal.domain.entity.Qna;
+import com.ssafy.WhereIsMyHomeFinal.domain.entity.UserInfo;
 import com.ssafy.WhereIsMyHomeFinal.domain.enumtype.ReplyState;
-import com.ssafy.WhereIsMyHomeFinal.domain.exception.NotFoundException;
+import com.ssafy.WhereIsMyHomeFinal.domain.exception.ResourceNotFoundException;
 import com.ssafy.WhereIsMyHomeFinal.repository.QnaRepository;
+import com.ssafy.WhereIsMyHomeFinal.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -21,8 +24,12 @@ public class QnaServiceImpl implements QnaService{
 
     private final QnaRepository qnaRepository;
 
+    private final UserRepository userRepository;
+
     @Override
-    public void register(QnaDto qnaDto) {
+    public void register(QnaDto qnaDto, UserDetails userDetails) {
+        Optional<UserInfo> userInfo = userRepository.findByUsername(userDetails.getUsername());
+        qnaDto.setUserInfo(userInfo.orElseThrow(() -> new ResourceNotFoundException("로그인을 해주세요")));
         qnaRepository.save(new Qna(qnaDto));
     }
 
@@ -30,7 +37,7 @@ public class QnaServiceImpl implements QnaService{
     public Page<QnaDto> getQnaList(Pageable pageable) {
         return qnaRepository.findAll(pageable).map(q -> QnaDto.builder()
                 .qnaId(q.getId())
-                .userid(q.getUserId())
+                .userInfo(q.getUserInfo())
                 .subject(q.getSubject())
                 .content(q.getContent())
                 .replyState(q.getReplyState().getDescription())
@@ -42,11 +49,11 @@ public class QnaServiceImpl implements QnaService{
     public QnaDto getQnaDto(Long qnaId) {
         Optional<Qna> qna = qnaRepository.findById(qnaId);
         if (qna.isEmpty()) {
-            throw new NotFoundException("등록 처리시 문제가 발생했습니다.");
+            throw new ResourceNotFoundException("등록 처리시 문제가 발생했습니다.");
         }
         return QnaDto.builder()
                 .qnaId(qna.get().getId())
-                .userid(qna.get().getUserId())
+                .userInfo(qna.get().getUserInfo())
                 .subject(qna.get().getSubject())
                 .content(qna.get().getSubject())
                 .replyState(qna.get().getReplyState().getDescription())
@@ -62,14 +69,14 @@ public class QnaServiceImpl implements QnaService{
 
     @Override
     public void updateQna(QnaDto qnaDto) {
-        Qna qna = qnaRepository.findById(qnaDto.getQnaId()).orElseThrow(() -> new NotFoundException("수정 처리시 문제가 발생했습니다."));
+        Qna qna = qnaRepository.findById(qnaDto.getQnaId()).orElseThrow(() -> new ResourceNotFoundException("수정 처리시 문제가 발생했습니다."));
         qna.setSubject(qnaDto.getSubject());
         qna.setContent(qnaDto.getContent());
     }
 
     @Override
     public void registerReply(ReplyDto replyDto) {
-        Qna qna = qnaRepository.findById(replyDto.getQnaId()).orElseThrow(() -> new NotFoundException("수정 처리시 문제가 발생했습니다."));
+        Qna qna = qnaRepository.findById(replyDto.getQnaId()).orElseThrow(() -> new ResourceNotFoundException("수정 처리시 문제가 발생했습니다."));
         qna.setReply(replyDto.getReply());
         qna.setReplyState(ReplyState.Y);
     }
