@@ -20,7 +20,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     private final UserRepository userRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) throws ResourceNotFoundException {
         Optional<UserInfo> userInfo = userRepository.findByUsername(username);
         if (userInfo.isEmpty()) {
             throw new ResourceNotFoundException("등록되지 않은 사용자입니다.");
