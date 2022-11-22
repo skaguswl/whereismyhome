@@ -37,6 +37,7 @@ public class SecurityConfig {
                 .frameOptions()
                 .sameOrigin();
         http.csrf().disable();
+        http.logout().disable();
         http.formLogin()
                 .successHandler((request, response, authentication) -> {
 //                    response.sendRedirect("/");
