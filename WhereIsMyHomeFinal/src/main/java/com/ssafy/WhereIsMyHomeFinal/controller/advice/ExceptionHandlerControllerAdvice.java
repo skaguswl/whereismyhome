@@ -31,4 +31,10 @@ public class ExceptionHandlerControllerAdvice {
     public StandardExceptionDto NotFoundExceptionHandler(ResourceNotFoundException e) {
         return new StandardExceptionDto(e.getMessage());
     }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public StandardExceptionDto runtimeExceptionHandler(RuntimeException e) {
+        return new StandardExceptionDto(e.getMessage());
+    }
 }
