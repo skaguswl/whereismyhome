@@ -7,14 +7,20 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    isLogin: false,
+    role: null,
+    username: null,
     sidos: [{ value: null, text: "선택하세요" }],
     guguns: [{ value: null, text: "선택하세요" }],
     dongs: [{ value: null, text: "선택하세요" }],
-    houses: [{lat: null, lng: null}],
+    houses: [{ lat: null, lng: null }],
     house: null,
   },
   getters: {},
   mutations: {
+    /////////////////////////////// User start /////////////////////////////////////
+
+    /////////////////////////////// User end /////////////////////////////////////
     /////////////////////////////// House start /////////////////////////////////////
     SET_SIDO_LIST(state, sidos) {
       sidos.forEach((sido) => {
@@ -45,7 +51,7 @@ export default new Vuex.Store({
       state.dongs = [{ value: null, text: "선택하세요" }];
     },
     SET_HOUSE_LIST(state, houses) {
-      state.houses = houses.map(house => Object.values(house));
+      state.houses = houses.map((house) => Object.values(house));
     },
     SET_DETAIL_HOUSE(state, house) {
       // console.log("Mutations", house);
@@ -54,6 +60,9 @@ export default new Vuex.Store({
     /////////////////////////////// House end /////////////////////////////////////
   },
   actions: {
+    /////////////////////////////// User start /////////////////////////////////////
+
+    /////////////////////////////// User end /////////////////////////////////////
     /////////////////////////////// House start /////////////////////////////////////
     getSido({ commit }) {
       http

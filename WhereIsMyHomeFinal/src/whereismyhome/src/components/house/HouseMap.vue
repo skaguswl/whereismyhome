@@ -2,7 +2,12 @@
   <div>
     <div id="map">
       <div class="aptlist">
-        <house-list></house-list>
+        <house-list
+          v-click-outside="onClickOutside"
+          :house="house"
+          v-if="isList"
+          :key="key"
+        ></house-list>
       </div>
     </div>
   </div>
@@ -17,7 +22,10 @@ export default {
   data() {
     return {
       markers: [],
-      house: {},
+      house: [],
+      isList: false,
+      isMarker: false,
+      key: "",
     };
   },
   components: {
@@ -28,6 +36,7 @@ export default {
   },
   watch: {
     houses: "displayMarker", // 대상 속성과 메서드 함수를 매칭
+    // house: ""
   },
   mounted() {
     if (window.kakao && window.kakao.maps) {
@@ -36,7 +45,8 @@ export default {
       const script = document.createElement("script");
       /* global kakao */
       script.onload = () => kakao.maps.load(this.initMap);
-      script.src = "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=ea07304fed72af84205aefbab8af45d7";
+      script.src =
+        "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=ea07304fed72af84205aefbab8af45d7";
       document.head.appendChild(script);
     }
   },
@@ -73,29 +83,40 @@ export default {
             clickable: true,
           });
           const houses = this.houses;
-          kakao.maps.event.addListener(marker, "click", function () {
+
+          kakao.maps.event.addListener(marker, "click", () => {
             const params = { lat: houses[idx][0], lng: houses[idx][1] };
             http.get(`/map/apt`, { params }).then(({ data }) => {
+              // console.log("aaa");
               this.house = data;
               console.log(this.house);
+              this.key = this.house[0].aptCode;
             });
+            // if (!this.isList) {
+            this.isMarker = true;
+            // }
+            this.isList = true;
           });
           return marker;
         });
 
-        const bounds = positions.reduce((bounds, latlng) => bounds.extend(latlng), new kakao.maps.LatLngBounds());
+        const bounds = positions.reduce(
+          (bounds, latlng) => bounds.extend(latlng),
+          new kakao.maps.LatLngBounds()
+        );
 
         this.map.setBounds(bounds);
-        // 마커에 클릭이벤트를 등록합니다
-        // this.markers.forEach((marker) =>
-        //   kakao.maps.event.addListener(marker, "click", function () {
-        //     // const params = { lat: this.houses[idx][0], lng: this.houses[idx][1] };
-        //     console.log(this.houses);
-        //     // http.get(`/map/apt`)
-        //     console.log(marker);
-        //   })
-        // );
       }
+    },
+    onClickOutside() {
+      // console.log("list" + this.isList);
+      // console.log("marker" + this.isMarker);
+      // this.isList = false;
+      if (this.isList && !this.isMarker) {
+        this.isList = false;
+      }
+      this.isMarker = false;
+      // this.isList = false;/
     },
     displayInfoWindow() {
       if (this.infowindow && this.infowindow.getMap()) {
@@ -124,12 +145,13 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 #map {
-  width: ;
+  width: 100%;
   height: 600px;
   position: relative;
 }
 .aptlist {
   position: absolute;
+  width: 30%;
   top: 0;
   left: 0;
   z-index: 999;

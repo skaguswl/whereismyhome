@@ -83,16 +83,16 @@ export default {
   methods: {
     confirm() {
       http
-        .post(`/user/join`, {
-          username: this.user.username,
-          userid: this.user.userid,
-          userpwd: this.user.password,
+        .post(`/user/register`, {
+          name: this.user.username,
+          username: this.user.userid,
+          password: this.user.userpwd,
           email: this.user.email,
         })
         .then((response) => {
-          let msg = "로그인 처리시 문제가 발생했습니다.";
+          let msg = "회원가입 처리시 문제가 발생했습니다.";
           if (response.status === 200) {
-            msg = "로그인 되었습니다.";
+            msg = "회원가입 되었습니다.";
           }
           alert(msg);
           this.moveHome();

@@ -7,7 +7,6 @@
       :src="require('@/assets/city.jpg')"
       transition="scale-transition"
     />
-    <v-card-text class="cardtitle text-h5 font-weight-bold">아아아아</v-card-text>
   </v-card>
 </template>
 

@@ -13,20 +13,20 @@
             <b-alert show variant="danger" v-if="isLoginError"
               >아이디 또는 비밀번호를 확인하세요.</b-alert
             >
-            <b-form-group label="아이디:" label-for="userid">
+            <b-form-group label="아이디:" label-for="username">
               <b-form-input
-                id="userid"
-                v-model="user.userid"
+                id="username"
+                v-model="user.username"
                 required
                 placeholder="아이디 입력...."
                 @keyup.enter="confirm"
               ></b-form-input>
             </b-form-group>
-            <b-form-group label="비밀번호:" label-for="userpwd">
+            <b-form-group label="비밀번호:" label-for="password">
               <b-form-input
                 type="password"
-                id="userpwd"
-                v-model="user.userpwd"
+                id="password"
+                v-model="user.password"
                 required
                 placeholder="비밀번호 입력...."
                 @keyup.enter="confirm"
@@ -45,25 +45,26 @@
 </template>
 
 <script>
-import http from "@/api/http";
+import axios from "axios";
+// import http from "@/api/http";
 export default {
   name: "UserLogin",
   data() {
     return {
       isLoginError: false,
       user: {
-        userid: null,
-        userpwd: null,
+        username: null,
+        password: null,
       },
     };
   },
   methods: {
     confirm() {
-      http
-        .post(`/user/login`, {
-          userid: this.user.userid,
-          userpwd: this.user.password,
-        })
+      const form = new FormData();
+      form.append("username", this.user.username);
+      form.append("password", this.user.password);
+      axios
+        .post(`http://localhost:8080/login`, form, { withCredentials: true })
         .then((response) => {
           let msg = "로그인 처리시 문제가 발생했습니다.";
           if (response.status === 200) {
@@ -72,7 +73,7 @@ export default {
           alert(msg);
           this.moveHome();
         });
-      // alert("로그인!!!");
+      // (await axios.post(`${myData.domain}/login`, form, { withCredentials: true })).status;
     },
     movePage() {
       this.$router.push({ name: "join" });

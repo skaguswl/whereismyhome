@@ -9,13 +9,13 @@
         </v-tabs>
       </v-card>
     </v-col> -->
-    <v-col class="sm-3">
+    <v-col class="sm-3 selector">
       <v-select v-model="sidoCode" :items="sidos" @change="gugunList"></v-select>
     </v-col>
-    <v-col class="sm-3">
+    <v-col class="sm-3 selector">
       <v-select v-model="gugunCode" :items="guguns" @change="dongList"></v-select>
     </v-col>
-    <v-col class="sm-3">
+    <v-col class="sm-3 selector">
       <v-select v-model="dongCode" :items="dongs" @change="searchApt"></v-select>
     </v-col>
   </v-row>
@@ -51,6 +51,7 @@ export default {
       // console.log(this.sidoCode);
       this.CLEAR_GUGUN_LIST();
       this.gugunCode = null;
+      // console.log(this.sidoCode);
       if (this.sidoCode) this.getGugun(this.sidoCode);
     },
     dongList() {
@@ -66,4 +67,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.selector {
+  z-index: 9999;
+}
+</style>
