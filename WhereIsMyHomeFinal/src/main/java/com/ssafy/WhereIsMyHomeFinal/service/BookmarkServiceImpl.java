@@ -9,11 +9,11 @@ import com.ssafy.WhereIsMyHomeFinal.repository.BookmarkRepository;
 import com.ssafy.WhereIsMyHomeFinal.repository.HouseinfoRepository;
 import com.ssafy.WhereIsMyHomeFinal.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -44,17 +44,12 @@ public class BookmarkServiceImpl implements BookmarkService {
     }
 
     @Override
-    public Page<BookmarkDto> get(UserInfo userInfo, Pageable pageable) {
-        return bookmarkRepository.findByUserId(userInfo.getId(), pageable).map(b -> BookmarkDto.builder()
+    public List<BookmarkDto> get(UserInfo userInfo) {
+        return bookmarkRepository.findByUserId(userInfo.getId()).stream().map(b -> BookmarkDto.builder()
                 .bookmarkId(b.getId())
                 .apartmentName(b.getHouseinfo().getApartmentName())
                 .lat(b.getHouseinfo().getLat())
                 .lng(b.getHouseinfo().getLng())
-                .roadName(b.getHouseinfo().getRoadName())
-                .buildYear(b.getHouseinfo().getBuildYear())
-                .aptCode(b.getHouseinfo().getAptCode())
-                .dong(b.getHouseinfo().getDong())
-                .jibun(b.getHouseinfo().getJibun())
-                .build());
+                .build()).collect(Collectors.toList());
     }
 }

@@ -11,16 +11,6 @@ public class BookmarkDto {
 
     private Long bookmarkId;
 
-    private Long aptCode;
-
-    private Integer buildYear;
-
-    private String roadName;
-
-    private String dong;
-
-    private String jibun;
-
     private String apartmentName;
 
     private String lat;

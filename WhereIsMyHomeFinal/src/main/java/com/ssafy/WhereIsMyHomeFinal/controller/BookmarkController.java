@@ -5,10 +5,11 @@ import com.ssafy.WhereIsMyHomeFinal.domain.entity.UserInfo;
 import com.ssafy.WhereIsMyHomeFinal.service.BookmarkService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -24,8 +25,8 @@ public class BookmarkController {
     }
 
     @GetMapping("/get")
-    public Page<BookmarkDto> get(Pageable pageable, @AuthenticationPrincipal UserInfo userInfo) {
-        return bookmarkService.get(userInfo, pageable);
+    public List<BookmarkDto> get(@AuthenticationPrincipal UserInfo userInfo) {
+        return bookmarkService.get(userInfo);
     }
 
     @DeleteMapping("/delete")
