@@ -1,17 +1,16 @@
 package com.ssafy.WhereIsMyHomeFinal.controller;
 
 import com.ssafy.WhereIsMyHomeFinal.domain.dto.UserInfoDto;
+import com.ssafy.WhereIsMyHomeFinal.domain.entity.UserInfo;
 import com.ssafy.WhereIsMyHomeFinal.domain.exception.InvalidFormException;
 import com.ssafy.WhereIsMyHomeFinal.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/user")
@@ -36,5 +35,10 @@ public class UserController {
         }
         userService.createAdminUser(userInfoDto);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping
+    public UserInfoDto get(@AuthenticationPrincipal UserInfo userInfo) {
+        return new UserInfoDto(userInfo);
     }
 }
