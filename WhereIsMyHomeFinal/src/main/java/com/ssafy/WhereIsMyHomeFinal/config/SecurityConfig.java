@@ -32,6 +32,10 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.cors();
         http.authorizeRequests()
+                .antMatchers("/bookmark/**").hasAnyRole("USER", "ADMIN")
+                .antMatchers("/logout").hasAnyRole("USER", "ADMIN")
+                .antMatchers("/map/**").hasAnyRole("USER", "ADMIN")
+                .antMatchers("/qna/reply").hasRole("ADMIN")
                 .anyRequest().permitAll();
         http.headers()
                 .frameOptions()
@@ -39,9 +43,7 @@ public class SecurityConfig {
         http.csrf().disable();
         http.logout().disable();
         http.formLogin()
-                .successHandler((request, response, authentication) -> {
-                    response.sendRedirect(request.getContextPath() + "/");
-                })
+                .successHandler((request, response, authentication) -> response.sendRedirect(request.getContextPath() + "/"))
                 .failureHandler((request, response, exception) -> {
                     throw new LoginFailureException("로그인 실패");
                 });
