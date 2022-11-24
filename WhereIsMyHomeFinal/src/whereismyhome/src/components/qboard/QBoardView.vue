@@ -2,7 +2,7 @@
   <b-container class="bv-example-row mt-3">
     <b-row>
       <b-col>
-        <b-alert show><h3>글보기</h3></b-alert>
+        <b-alert show variant="secondary"><h3>글보기</h3></b-alert>
       </b-col>
     </b-row>
     <b-row class="mb-1">
@@ -15,13 +15,14 @@
         >
         <b-button variant="outline-danger" size="sm" @click="deleteArticle">글삭제</b-button>
         <b-button variant="outline-secondary" size="sm" @click="moveWriteReply">답변작성</b-button>
+        <b-button variant="outline-danger" size="sm" @click="deleteReply">답변삭제</b-button>
       </b-col>
     </b-row>
     <b-row class="mb-1">
       <b-col>
         <b-card
           :header-html="`<h3>${article.qnaId}.
-          ${article.subject} </h3><div><h6>${article.userid}</div><div>${article.createdDate}</h6></div>`"
+          ${article.subject} </h3><div><h6>${article.username}</div><div>${article.createdDate}</h6></div>`"
           class="mb-2"
           border-variant="dark"
           no-body
@@ -98,6 +99,15 @@ export default {
     },
     moveWriteReply() {
       this.$router.push({ name: "qboardrwrite", params: { qnaId: this.article.qnaId } });
+    },
+    deleteReply() {
+      let params = { qnaId: this.article.qnaId };
+      http.delete(`qna/reply`, { params }).then((response) => {
+        if (response.status === 200) {
+          alert("답변이 삭제 되었습니다.");
+          this.$router.push({ name: "qboardlist" });
+        }
+      });
     },
   },
   // filters: {

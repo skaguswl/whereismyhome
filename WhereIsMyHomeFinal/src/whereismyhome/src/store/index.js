@@ -15,12 +15,26 @@ export default new Vuex.Store({
     dongs: [{ value: null, text: "선택하세요" }],
     houses: [{ lat: null, lng: null }],
     house: null,
+    aptlist: [],
+    marker: [],
   },
   getters: {},
   mutations: {
+    SET_MARKER(state, marker) {
+      state.marker = marker;
+      console.log("marker:" + state.marker);
+    },
     /////////////////////////////// User start /////////////////////////////////////
+    SET_LOGIN_STATE(state, username) {
+      state.isLogin = true;
+      state.username = username;
+    },
+    SET_LOGOUT_STATE(state) {
+      state.isLogin = false;
+      state.username = null;
+      state.role = null;
+    },
 
-    /////////////////////////////// User end /////////////////////////////////////
     /////////////////////////////// House start /////////////////////////////////////
     SET_SIDO_LIST(state, sidos) {
       sidos.forEach((sido) => {
@@ -60,9 +74,9 @@ export default new Vuex.Store({
     /////////////////////////////// House end /////////////////////////////////////
   },
   actions: {
-    /////////////////////////////// User start /////////////////////////////////////
+    /////////////////////////////// aptlike start /////////////////////////////////////
 
-    /////////////////////////////// User end /////////////////////////////////////
+    /////////////////////////////// aptlike end /////////////////////////////////////
     /////////////////////////////// House start /////////////////////////////////////
     getSido({ commit }) {
       http
@@ -114,8 +128,10 @@ export default new Vuex.Store({
     detailHouse({ commit }, house) {
       // 나중에 house.일련번호를 이용하여 API 호출
       console.log(house.일련번호);
-
       commit("SET_DETAIL_HOUSE", house);
+    },
+    setMarker({ commit }, marker) {
+      commit("SET_MARKER", marker);
     },
     /////////////////////////////// House end /////////////////////////////////////
   },
