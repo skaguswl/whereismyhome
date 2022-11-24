@@ -31,19 +31,24 @@
             <b-icon icon="person-circle"></b-icon> 회원가입
           </router-link></v-btn
         >
-        <v-btn
-          ><router-link :to="{ name: 'login' }" class="link">
+        <v-btn>
+          <router-link :to="{ name: 'login' }" class="link">
             <b-icon icon="key"></b-icon> 로그인
-          </router-link></v-btn
-        >
+          </router-link>
+        </v-btn>
       </div>
       <div v-else>
         {{ username }}님 환영합니다.
-        <v-btn @click="logout"
-          ><router-link :to="{ name: 'home' }" class="link">
+        <v-btn>
+          <router-link :to="{ name: 'mypage' }" class="link">
+            <b-icon icon="key"></b-icon> 마이페이지
+          </router-link>
+        </v-btn>
+        <v-btn @click="logout">
+          <router-link :to="{ name: 'home' }" class="link">
             <b-icon icon="key"></b-icon> 로그아웃
-          </router-link></v-btn
-        >
+          </router-link>
+        </v-btn>
       </div>
     </v-app-bar>
   </div>
