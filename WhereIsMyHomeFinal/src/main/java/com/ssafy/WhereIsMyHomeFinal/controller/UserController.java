@@ -28,4 +28,13 @@ public class UserController {
         userService.createUser(userInfoDto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @PostMapping("/register/admin")
+    public ResponseEntity<?> registerAdmin(@Validated @RequestBody UserInfoDto userInfoDto, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            throw new InvalidFormException("다시 입력해주세요");
+        }
+        userService.createAdminUser(userInfoDto);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

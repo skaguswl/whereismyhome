@@ -65,7 +65,19 @@ public class QnaController {
 
     @PostMapping("/reply")
     public ResponseEntity<?> registerReply(@RequestBody ReplyDto replyDto) {
-        qnaService.registerReply(replyDto);
+        qnaService.reply(replyDto);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @DeleteMapping("/reply/delete")
+    public ResponseEntity<?> deleteReply(@RequestParam("qnaId") Long qnaId) {
+        qnaService.deleteReply(qnaId);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PatchMapping("/reply")
+    public ResponseEntity<?> updateReply(@RequestBody ReplyDto replyDto) {
+        qnaService.reply(replyDto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

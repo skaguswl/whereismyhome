@@ -72,9 +72,16 @@ public class QnaServiceImpl implements QnaService{
     }
 
     @Override
-    public void registerReply(ReplyDto replyDto) {
+    public void reply(ReplyDto replyDto) {
         Qna qna = qnaRepository.findById(replyDto.getQnaId()).orElseThrow(() -> new ResourceNotFoundException("수정 처리시 문제가 발생했습니다."));
         qna.setReply(replyDto.getReply());
         qna.setReplyState(ReplyState.Y);
+    }
+
+    @Override
+    public void deleteReply(Long qnaId) {
+        Qna qna = qnaRepository.findById(qnaId).orElseThrow(() -> new ResourceNotFoundException("못찾음"));
+        qna.setReply(null);
+        qna.setReplyState(ReplyState.N);
     }
 }

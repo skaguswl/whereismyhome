@@ -38,4 +38,8 @@ public class UserInfo extends BaseEntity {
         this.role = Role.USER;
         this.email = userInfoDto.getEmail();
     }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
 }

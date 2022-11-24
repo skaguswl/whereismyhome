@@ -18,6 +18,8 @@ public interface QnaService {
 
     void updateQna(QnaDto qnaDto);
 
-    void registerReply(ReplyDto replyDto);
+    void reply(ReplyDto replyDto);
+
+    void deleteReply(Long qnaId);
 }
 

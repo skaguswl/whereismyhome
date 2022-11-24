@@ -16,4 +16,5 @@ public interface QnaRepository extends JpaRepository<Qna, Long> {
     Optional<Qna> findById(Long qnaId);
 
     void deleteById(Long qnaId);
+
 }
