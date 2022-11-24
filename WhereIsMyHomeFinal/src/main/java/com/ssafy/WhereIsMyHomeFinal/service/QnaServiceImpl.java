@@ -11,7 +11,6 @@ import com.ssafy.WhereIsMyHomeFinal.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -35,7 +34,7 @@ public class QnaServiceImpl implements QnaService{
     public Page<QnaDto> getQnaList(Pageable pageable) {
         return qnaRepository.findAll(pageable).map(q -> QnaDto.builder()
                 .qnaId(q.getId())
-                .username(q.getUserInfo() == null ? null : q.getUserInfo().getUsername())
+                .username(q.getUserInfo() == null ? "익명사용자" : q.getUserInfo().getUsername())
                 .subject(q.getSubject())
                 .content(q.getContent())
                 .replyState(q.getReplyState().getDescription())
@@ -51,7 +50,7 @@ public class QnaServiceImpl implements QnaService{
         }
         return QnaDto.builder()
                 .qnaId(qna.get().getId())
-                .username(qna.get().getUserInfo() == null ? null : qna.get().getUserInfo().getUsername())
+                .username(qna.get().getUserInfo() == null ? "익명사용자" : qna.get().getUserInfo().getUsername())
                 .subject(qna.get().getSubject())
                 .content(qna.get().getSubject())
                 .replyState(qna.get().getReplyState().getDescription())

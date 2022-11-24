@@ -1,6 +1,5 @@
 package com.ssafy.WhereIsMyHomeFinal.domain.dto;
 
-import com.ssafy.WhereIsMyHomeFinal.domain.entity.UserInfo;
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;
