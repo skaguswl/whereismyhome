@@ -71,7 +71,7 @@ public class QnaController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @DeleteMapping("/reply/delete")
+    @DeleteMapping("/reply")
     public ResponseEntity<?> deleteReply(@RequestParam("qnaId") Long qnaId) {
         qnaService.deleteReply(qnaId);
         return new ResponseEntity<>(HttpStatus.OK);
