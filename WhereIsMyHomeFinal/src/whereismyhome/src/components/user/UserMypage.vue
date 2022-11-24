@@ -2,19 +2,16 @@
   <v-card class="mx-auto my-4 text-center loginform" max-width="720">
     <v-card-title><h1>마이페이지</h1></v-card-title>
 
-    <v-list-item>
-      <v-list-item-content>
-        <v-list-item-title
-          ><h5>USER NAME : {{ user.name }}</h5></v-list-item-title
-        >
-        <v-list-item-title
-          ><h5>USER ID : {{ user.username }}</h5></v-list-item-title
-        >
-        <v-list-item-title
-          ><h5>USER EMAIL: {{ user.email }}</h5></v-list-item-title
-        >
-      </v-list-item-content>
-    </v-list-item>
+    <v-form ref="form">
+      <v-text-field v-model="user.name" label="이름"></v-text-field>
+      <v-text-field v-model="user.username" label="ID"></v-text-field>
+      <v-text-field v-model="user.email" label="이메일"></v-text-field>
+    </v-form>
+
+    <v-row justify="space-around">
+      <v-col><v-btn depressed> 수정 </v-btn></v-col>
+      <v-col><v-btn depressed> 삭제 </v-btn></v-col>
+    </v-row>
     <v-card-title><h3>찜해둔 아파트</h3></v-card-title>
 
     <v-list>
@@ -29,10 +26,6 @@
         </v-list-item-icon>
       </v-list-item>
     </v-list>
-    <v-row justify="space-around">
-      <v-col><v-btn depressed> 수정 </v-btn></v-col>
-      <v-col><v-btn depressed> 삭제 </v-btn></v-col>
-    </v-row>
   </v-card>
 </template>
 
