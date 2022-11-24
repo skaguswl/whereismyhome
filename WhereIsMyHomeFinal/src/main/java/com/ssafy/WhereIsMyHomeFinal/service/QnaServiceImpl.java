@@ -14,7 +14,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -31,15 +33,15 @@ public class QnaServiceImpl implements QnaService{
     }
 
     @Override
-    public Page<QnaDto> getQnaList(Pageable pageable) {
-        return qnaRepository.findAll(pageable).map(q -> QnaDto.builder()
+    public List<QnaDto> getQnaList() {
+        return qnaRepository.findAll().stream().map(q -> QnaDto.builder()
                 .qnaId(q.getId())
                 .username(q.getUserInfo() == null ? "익명사용자" : q.getUserInfo().getUsername())
                 .subject(q.getSubject())
                 .content(q.getContent())
                 .replyState(q.getReplyState().getDescription())
                 .createdDate(q.getCreatedDate().toLocalDate())
-                .build());
+                .build()).collect(Collectors.toList());
     }
 
     @Override

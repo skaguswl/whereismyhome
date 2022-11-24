@@ -16,6 +16,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/qna")
 @RequiredArgsConstructor
@@ -25,8 +27,8 @@ public class QnaController {
     private final QnaService qnaService;
 
     @GetMapping
-    public Page<QnaDto> getQnaList(Pageable pageable) {
-        return qnaService.getQnaList(pageable);
+    public List<QnaDto> getQnaList() {
+        return qnaService.getQnaList();
     }
 
     @PostMapping
