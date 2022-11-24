@@ -32,11 +32,11 @@ export default {
     HouseList,
   },
   computed: {
-    ...mapState(["houses"]),
+    ...mapState(["houses", "marker"]),
   },
   watch: {
     houses: "displayMarker", // 대상 속성과 메서드 함수를 매칭
-    // house: ""
+    marker: "displayMarker2",
   },
   mounted() {
     if (window.kakao && window.kakao.maps) {
@@ -89,7 +89,47 @@ export default {
             http.get(`/map/apt`, { params }).then(({ data }) => {
               // console.log("aaa");
               this.house = data;
-              console.log(this.house);
+              // console.log(this.house);
+              this.key = this.house[0].aptCode;
+            });
+            // if (!this.isList) {
+            this.isMarker = true;
+            // }
+            this.isList = true;
+          });
+          return marker;
+        });
+
+        const bounds = positions.reduce(
+          (bounds, latlng) => bounds.extend(latlng),
+          new kakao.maps.LatLngBounds()
+        );
+
+        this.map.setBounds(bounds);
+      }
+    },
+    displayMarker2() {
+      if (this.markers.length > 0) {
+        this.markers.forEach((marker) => marker.setMap(null));
+      }
+
+      const positions = this.marker.map((position) => new kakao.maps.LatLng(...position));
+
+      if (positions.length > 0) {
+        this.markers = positions.map((position, idx) => {
+          const marker = new kakao.maps.Marker({
+            map: this.map,
+            position,
+            clickable: true,
+          });
+          const houses = this.marker;
+
+          kakao.maps.event.addListener(marker, "click", () => {
+            const params = { lat: houses[idx][0], lng: houses[idx][1] };
+            http.get(`/map/apt`, { params }).then(({ data }) => {
+              // console.log("aaa");
+              this.house = data;
+              // console.log(this.house);
               this.key = this.house[0].aptCode;
             });
             // if (!this.isList) {

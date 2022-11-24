@@ -1,5 +1,5 @@
 <template>
-  <b-container class="bv-example-row mt-3">
+  <!-- <b-container class="bv-example-row mt-3">
     <b-row>
       <b-col>
         <b-alert variant="secondary" show><h3>회원가입</h3></b-alert>
@@ -62,7 +62,47 @@
       </b-col>
       <b-col></b-col>
     </b-row>
-  </b-container>
+  </b-container> -->
+  <v-card class="mx-auto my-4 text-center joinform" max-width="720">
+    <v-card-title><h3>회원가입</h3></v-card-title>
+
+    <v-card-text>
+      <form>
+        <v-text-field
+          id="username"
+          v-model="user.username"
+          label="이름"
+          required
+          :rules="nameRules"
+        ></v-text-field>
+        <v-text-field
+          id="userid"
+          v-model="user.userid"
+          label="아이디"
+          required
+          :rules="idRules"
+        ></v-text-field>
+        <v-text-field
+          id="password"
+          v-model="user.userpwd"
+          type="password"
+          label="비밀번호"
+          required
+          :rules="pwdRules"
+        ></v-text-field>
+        <v-text-field
+          id="email"
+          v-model="user.email"
+          type="email"
+          label="E-mail"
+          required
+          :rules="emailRules"
+        ></v-text-field>
+        <v-btn class="mr-4" @click="confirm"> 회원가입 </v-btn>
+        <v-btn @click="movePage"> 로그인 </v-btn>
+      </form>
+    </v-card-text>
+  </v-card>
 </template>
 
 <script>
@@ -78,8 +118,16 @@ export default {
         userpwd: null,
         email: null,
       },
+      nameRules: [(v) => !!v || "Name is required"],
+      idRules: [(v) => !!v || "ID is required"],
+      pwdRules: [(v) => !!v || "Password is required"],
+      emailRules: [
+        (v) => !!v || "E-mail is required",
+        (v) => /.+@.+/.test(v) || "E-mail must be valid",
+      ],
     };
   },
+
   methods: {
     confirm() {
       http
@@ -109,4 +157,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.joinform {
+  padding: 5%;
+}
+</style>
