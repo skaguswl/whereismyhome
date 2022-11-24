@@ -15,7 +15,7 @@ public class QnaDto {
 
     private Long qnaId;
 
-    private UserInfo userInfo;
+    private String username;
 
     @NotBlank
     private String subject;

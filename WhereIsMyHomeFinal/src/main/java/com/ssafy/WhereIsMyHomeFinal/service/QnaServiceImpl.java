@@ -27,17 +27,15 @@ public class QnaServiceImpl implements QnaService{
     private final UserRepository userRepository;
 
     @Override
-    public void register(QnaDto qnaDto, UserDetails userDetails) {
-        Optional<UserInfo> userInfo = userRepository.findByUsername(userDetails.getUsername());
-        qnaDto.setUserInfo(userInfo.orElseThrow(() -> new ResourceNotFoundException("로그인을 해주세요")));
-        qnaRepository.save(new Qna(qnaDto));
+    public void register(QnaDto qnaDto, UserInfo userInfo) {
+        qnaRepository.save(new Qna(qnaDto, userInfo));
     }
 
     @Override
     public Page<QnaDto> getQnaList(Pageable pageable) {
         return qnaRepository.findAll(pageable).map(q -> QnaDto.builder()
                 .qnaId(q.getId())
-                .userInfo(q.getUserInfo())
+                .username(q.getUserInfo() == null ? null : q.getUserInfo().getUsername())
                 .subject(q.getSubject())
                 .content(q.getContent())
                 .replyState(q.getReplyState().getDescription())
@@ -53,7 +51,7 @@ public class QnaServiceImpl implements QnaService{
         }
         return QnaDto.builder()
                 .qnaId(qna.get().getId())
-                .userInfo(qna.get().getUserInfo())
+                .username(qna.get().getUserInfo() == null ? null : qna.get().getUserInfo().getUsername())
                 .subject(qna.get().getSubject())
                 .content(qna.get().getSubject())
                 .replyState(qna.get().getReplyState().getDescription())

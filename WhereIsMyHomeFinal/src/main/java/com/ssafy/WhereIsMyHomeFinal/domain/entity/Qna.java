@@ -56,8 +56,8 @@ public class Qna extends BaseEntity {
         this.reply = reply;
     }
 
-    public Qna(QnaDto qnaDto) {
-        this.userInfo = qnaDto.getUserInfo();
+    public Qna(QnaDto qnaDto, UserInfo userInfo) {
+        this.userInfo = userInfo;
         this.subject = qnaDto.getSubject();
         this.content = qnaDto.getContent();
     }
