@@ -1,13 +1,13 @@
 package com.ssafy.WhereIsMyHomeFinal.domain.entity;
 
-import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
-@Builder
+@NoArgsConstructor
 public class Bookmark extends BaseEntity {
 
     @Id
@@ -22,4 +22,9 @@ public class Bookmark extends BaseEntity {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "apt_code")
     private Houseinfo houseinfo;
+
+    public Bookmark(UserInfo userInfo, Houseinfo houseinfo) {
+        this.userInfo = userInfo;
+        this.houseinfo = houseinfo;
+    }
 }

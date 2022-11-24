@@ -28,10 +28,10 @@ public class BookmarkServiceImpl implements BookmarkService {
     @Override
     public void register(Long aptCode, UserInfo userInfo) {
         Houseinfo houseinfo = houseinfoRepository.findById(aptCode).orElseThrow(() -> new ResourceNotFoundException("아파트가 없습니다"));
-        if (bookmarkRepository.findByUserIdAndAptCode(userInfo.getId(), aptCode).isEmpty()) {
+        if (bookmarkRepository.findByUserIdAndAptCode(userInfo.getId(), aptCode).isPresent()) {
             throw new RuntimeException("이미 등록된 북마크 입니다.");
         }
-        bookmarkRepository.save(Bookmark.builder().userInfo(userInfo).houseinfo(houseinfo).build());
+        bookmarkRepository.save(new Bookmark(userInfo, houseinfo));
     }
 
     @Override
@@ -46,9 +46,11 @@ public class BookmarkServiceImpl implements BookmarkService {
     @Override
     public Page<BookmarkDto> get(UserInfo userInfo, Pageable pageable) {
         return bookmarkRepository.findByUserId(userInfo.getId(), pageable).map(b -> BookmarkDto.builder()
+                .bookmarkId(b.getId())
                 .apartmentName(b.getHouseinfo().getApartmentName())
                 .lat(b.getHouseinfo().getLat())
                 .lng(b.getHouseinfo().getLng())
+                .roadName(b.getHouseinfo().getRoadName())
                 .buildYear(b.getHouseinfo().getBuildYear())
                 .aptCode(b.getHouseinfo().getAptCode())
                 .dong(b.getHouseinfo().getDong())

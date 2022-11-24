@@ -9,6 +9,8 @@ import lombok.Setter;
 @Builder
 public class BookmarkDto {
 
+    private Long bookmarkId;
+
     private Long aptCode;
 
     private Integer buildYear;
